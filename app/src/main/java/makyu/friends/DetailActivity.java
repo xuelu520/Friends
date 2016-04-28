@@ -45,10 +45,11 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //用intent启动拨打电话
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:10010"));
-                if (ActivityCompat.checkSelfPermission(DetailActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    startActivity(intent);
-                }
+                Uri uri=Uri.parse("tel:10010");
+                Intent intent=new Intent();
+                intent.setAction(Intent.ACTION_CALL);
+                intent.setData(uri);
+                DetailActivity.this.startActivity(intent);
             }
         });
     }
