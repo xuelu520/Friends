@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity{
                         .getColumnIndex(Phone.DISPLAY_NAME)));
                 contact.setId(cur.getLong(cur
                         .getColumnIndex(Phone.CONTACT_ID)));
-                System.out.println(contact.toString());
                 contactList.add(contact);
             }
         }
@@ -129,7 +128,7 @@ public class MainActivity extends AppCompatActivity{
         View popView = getLayoutInflater().inflate(R.layout.add_contact, null, false);
         popupWindow = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT, 600, true);
         //解决输入法盖住弹出框
-        //popupWindow 自动顶上去
+        //popupWindow 自动顶上去不后悔
         popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
         popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         popView.findViewById(R.id.cancel_action).setOnClickListener(new View.OnClickListener() {
