@@ -1,15 +1,10 @@
 package makyu.friends;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
@@ -45,7 +40,8 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //用intent启动拨打电话
-                Uri uri=Uri.parse("tel:10010");
+                String phone = contact.getPhone();
+                Uri uri=Uri.parse("tel:" + clearPhoneNum(phone));
                 Intent intent=new Intent();
                 intent.setAction(Intent.ACTION_CALL);
                 intent.setData(uri);
@@ -60,8 +56,15 @@ public class DetailActivity extends AppCompatActivity {
         call = (FloatingActionButton) findViewById(R.id.call);
     }
 
+    /**
+     * 替换电话号码中的无效字符  +86 空格  -
+    * @param num
+     * @return
+     */
     private String clearPhoneNum(String num) {
-        num = num.replaceAll("\\+", "");
-        return  "";
+        num = num.replaceAll("\\+86", "");
+        num = num.replaceAll("-", "");
+        num = num.replaceAll("\\s", "");
+        return  num;
     }
 }
