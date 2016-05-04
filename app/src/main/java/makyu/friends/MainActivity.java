@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -127,6 +128,10 @@ public class MainActivity extends AppCompatActivity{
         // 获取自定义布局文件add_contact.xml的视图
         View popView = getLayoutInflater().inflate(R.layout.add_contact, null, false);
         popupWindow = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT, 600, true);
+        //解决输入法盖住弹出框
+        //popupWindow 自动顶上去
+        popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
+        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         popView.findViewById(R.id.cancel_action).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
