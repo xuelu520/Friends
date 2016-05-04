@@ -128,14 +128,18 @@ public class MainActivity extends AppCompatActivity{
         View popView = getLayoutInflater().inflate(R.layout.add_contact, null, false);
         popupWindow = new PopupWindow(popView, ViewGroup.LayoutParams.MATCH_PARENT, 600, true);
         //解决输入法盖住弹出框
-        //popupWindow 自动顶上去不后悔
+        //popupWindow 自动顶上去
         popupWindow.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
         popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        setAlpha(0.4f);
+
         popView.findViewById(R.id.cancel_action).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (popupWindow != null && popupWindow.isShowing()) {
                     popupWindow.dismiss();
+                    setAlpha(1f);
                     popupWindow = null;
                 }
             }
@@ -148,6 +152,7 @@ public class MainActivity extends AppCompatActivity{
                 // TODO Auto-generated method stub
                 if (popupWindow != null && popupWindow.isShowing()) {
                     popupWindow.dismiss();
+                    setAlpha(1f);
                     popupWindow = null;
                 }
                 return false;
@@ -165,5 +170,12 @@ public class MainActivity extends AppCompatActivity{
         } else {
             initPopWindow();
         }
+    }
+
+
+    private void setAlpha(float alpha) {
+        WindowManager.LayoutParams params = this.getWindow().getAttributes();
+        params.alpha = alpha;
+        this.getWindow().setAttributes(params);
     }
 }
